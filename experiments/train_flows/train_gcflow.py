@@ -100,51 +100,7 @@ if __name__=='__main__':
 
 
 
-    # for trial_id in range(trial_num):
-    #
-    #     exp_id=0
-    #     best_acc_list=[]
-    #     SScore_list = []
-    #
-    #
-    #     for seed in tqdm(seeds):
-    #         print("\nExperiment: {}\n".format(exp_id))
-    #         trainer = makeTrainer(seed=seed, **cfg)
-    #         trainer.dynamic_train_nsf(cfg['num_epochs'], cfg['inner_epochs'])
-    #         best_acc_list.append(trainer.bestacc)
-    #         SScore_list.append(trainer.SScore)
-    #         exp_id=exp_id+1
-    #     best_acc_mean = np.mean(best_acc_list)
-    #     best_acc_std = np.std(best_acc_list)
-    #
-    #     SScore_mean = np.mean(SScore_list)
-    #     SScore_std = np.std(SScore_list)
-    #     with open("save/gcflow_citeseer.txt", "a+") as file:
-    #         file.write("=================\n")
-    #         file.write("\n trial {}".format(trial_id))
-    #         file.write("=================\n")
-    #         file.write("exp_list: \n")
-    #         for i in range(experiments_num):
-    #             file.write("exp:{}, seed: {}, acc: {:.3f}, silhouette: {:.3f}\n".format(i, seeds[i],
-    #                                                                                     best_acc_list[i],SScore_list[i]))
-    #         file.write("=================\n")
-    #         file.write("Micro-F1: {:.3f} +- {:.3f}\n".format(best_acc_mean, best_acc_std))
-    #         file.write("Silhouette: {:.3f} +- {:.3f}\n".format(SScore_mean, SScore_std))
-    #         file.write("=================")
-
-
-        # print("=================\n")
-        # print("\n trial {}".format(trial_id))
-        # print("=================\n")
-        # print("exp_list: \n")
-        # for i in range(experiments_num):
-        #     print("exp:{}, seed: {}, acc: {:.3f}, silhouette: {:.3f}\n".format(i, seeds[i], best_acc_list[i],SScore_list[i]))
-        #
-        # print("=================\n")
-        # print("Classification Accuracy: {:.3f} +- {:.3f}\n".format(best_acc_mean,best_acc_std))
-        # print("=================\n")
-        # print("Clustering  SScore: {:.3f} +- {:.3f}\n".format(SScore_mean,SScore_std))
-        # print("=================")
+    
 
 
 
