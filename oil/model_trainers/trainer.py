@@ -37,8 +37,6 @@ class Trainer(object,metaclass=Named):
         self.early_stop_metric = early_stop_metric
         self.finalacc=0
         self.bestacc=0
-        self.bestmi=0
-        self.bestari=0
         self.ARI=0
         self.best_val_acc=0
         self.best_epoch=0
@@ -77,47 +75,7 @@ class Trainer(object,metaclass=Named):
                 self.step(minibatch)
                 [sched.step(step/steps_per_epoch) for sched in self.lr_schedulers]
         self.logStuff(step)
-
-    def dynamic_train(self, num_epochs=100, inner_epoch=10):
-        self.totalep = num_epochs
-        start_epoch = self.epoch
-        steps_per_epoch = len(self.dataloaders['train'])
-        step = 0
-        for self.epoch in tqdm(range(start_epoch + 1, start_epoch + num_epochs + 1), desc='train'):
-            for self.inner_epoch in range(1, inner_epoch+1):
-                for i, minibatch in enumerate(self.dataloaders['train']):
-                    step = i + (self.epoch - 1) * steps_per_epoch
-                    inner_step = self.inner_epoch -1
-                    print("inner_step {}".format(inner_step))
-                    self.logStuff(step, minibatch)
-                    # with self.logger as do_log:
-                    #     if do_log:
-                    #         self.logStuff(step, minibatch)
-                    self.model.train()
-                    self.step(minibatch)
-                    [sched.step(step / steps_per_epoch) for sched in self.lr_schedulers]
-
-                    if self.inner_epoch > inner_epoch and self.epoch % 50==0:
-                        with Eval(self.model), torch.no_grad():
-                            x_adj_mat = (minibatch[1], self.adj_mat)
-                            _, _, z, _ = self.model.nll(x_adj_mat, self.idx_all)
-                            self.model.prior.update_membership(z)
-                            self.model.prior.update_means(z)
-                            self.model.prior.update_covariance(z)
-                            self.model.prior.update_weights()
-                    print("self.epoch={}".format(self.epoch))
-                    if self.epoch == self.totalep:
-                        with Eval(self.model), torch.no_grad():
-                            x_adj_mat = (minibatch[1], self.adj_mat)
-                            _, _, z, _ = self.model.nll(x_adj_mat, self.idx_all)
-                            torch.save(z, 'z_flow.pt')
-        self.logStuff(step)
-        if step == self.totalep - 1:
-            #torch.save(self.model.state_dict(), 'flowmodel_params.pt')
-            print("Final epoch FinalAcc {}".format(self.finalacc))
-            print("Best acc {}".format(self.bestacc))
-            print("Best mi {}".format(self.bestmi))
-            print("Best ari {}".format(self.bestari))
+            
 
     def dynamic_train_nsf(self, num_epochs=100, inner_epoch=10):
         #self.scheduler = optim.lr_scheduler.CosineAnnealingLR(self.optimizer, 250, 0)
@@ -143,10 +101,9 @@ class Trainer(object,metaclass=Named):
         self.logStuff(step)
         if step == self.totalep - 1:
             #torch.save(self.model.state_dict(), 'flowmodel_params.pt')
-            print("FinalAcc {:.3f}".format(self.finalacc))
             print("Best acc {:.3f} in epoch {}".format(self.bestacc,self.best_epoch))
-            print("Clustering MI {:.3f}, bestMI {:.3f}".format(self.MI, self.bestmi))
-            print("Clustering ARI {:.3f}, bestARI {:.3f}".format(self.ARI, self.bestari))
+            print("Clustering MI {:.3f}".format(self.MI))
+            print("Clustering ARI {:.3f}".format(self.ARI))
             print("Clustering SScore {:.3f}".format(self.SScore))
 
 
