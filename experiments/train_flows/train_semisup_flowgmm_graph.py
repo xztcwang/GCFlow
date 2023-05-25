@@ -263,12 +263,7 @@ class SemiFlowNSF(Trainer):
                 self.best_val_acc=metrics['val_Acc']
                 self.bestacc=metrics['test_Acc']
                 self.best_epoch=step
-                # mb1_adj = (minibatch[1], self.adj_mat)
-                # z, logabsdet = self.model.log_prob(x_adj=mb1_adj)
-                #pred = self.model.prior.classify(z).type_as(self.all_labels)
-                # self.bestari, self.bestmi, _, _ = utils.clustering_measure(z, pred, self.class_num,
-                #                                              self.all_labels, self.idx_train,
-                #                                              self.device)
+             
 
             if minibatch:
                 #calculate clustering accuracy
