@@ -17,11 +17,6 @@ import train_semisup_flowgmm_graph as graphflows
 import oil.model_trainers as trainers
 from oil.utils.mytqdm import tqdm
 
-# trial_num=10
-# experiments_num=10
-# seeds = np.random.randint(1, 100000, size=experiments_num)
-# seeds = seeds.tolist()
-
 
 def makeTrainer(*, seed=42, gpu=0, dataset=PUBMED, pcadim=50,
                 alg='flowgmm',
