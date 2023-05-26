@@ -62,6 +62,16 @@ python experiments/train_flows/train_gcflow.py --gpu 0 \
 --gauss_config "{'means_r': 1.6, 'cov_std': 1.1}" --trainer_config "{'unlab_weight':0.4}"
 ```
 
-## Reference:
-FlowGMM: https://github.com/izmailovpavel/flowgmm
-Neural Spline Flows: https://github.com/bayesiains/nsf
+## Citation:
+```
+@INPROCEEDINGS{Wang2023,
+  AUTHOR = {Tianchun Wang and Farzaneh Mirzazadeh and Xiang Zhang and Jie Chen},
+  TITLE = {{GC-Flow}: A Graph-Based Flow Network for Effective Clustering},
+  BOOKTITLE = {Proceedings of the Fortieth International Conference on Machine Learning},
+  YEAR = {2023},
+}
+```
+
+## References:
+- FlowGMM: https://github.com/izmailovpavel/flowgmm
+- Neural Spline Flows: https://github.com/bayesiains/nsf
